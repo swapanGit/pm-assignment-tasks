@@ -1,0 +1,1845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Wireframes - Shorts in Educational Search Solution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --yt-red: #FF0000;
+            --yt-dark: #0f0f0f;
+            --yt-light-bg: #f9f9f9;
+            --yt-border: #e5e5e5;
+            --yt-text: #0f0f0f;
+            --yt-text-secondary: #606060;
+            --yt-blue: #065fd4;
+            --learning-blue: #1a73e8;
+            --learning-light: #e8f0fe;
+            --success-green: #1e8e3e;
+            --warning-yellow: #f9ab00;
+            --error-red: #d93025;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: var(--yt-text);
+        }
+
+        /* Header */
+        .main-header {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--yt-dark);
+        }
+
+        .logo-section p {
+            font-size: 13px;
+            color: var(--yt-text-secondary);
+            margin-top: 4px;
+        }
+
+        .author-info {
+            text-align: right;
+            font-size: 13px;
+            color: var(--yt-text-secondary);
+        }
+
+        .author-info strong {
+            color: var(--yt-dark);
+        }
+
+        /* Wireframe Navigation */
+        .wireframe-nav {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .wireframe-tab {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 16px 28px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .wireframe-tab:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .wireframe-tab.active {
+            background: white;
+            color: var(--yt-dark);
+            border-color: white;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+
+        .wireframe-tab .rice-score {
+            background: var(--yt-red);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .wireframe-tab.active .rice-score {
+            background: var(--success-green);
+        }
+
+        /* Main Content */
+        .wireframe-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .wireframe-section {
+            display: none;
+        }
+
+        .wireframe-section.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Wireframe Info Card */
+        .wireframe-info {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .wireframe-info h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .wireframe-info .badge {
+            background: var(--learning-blue);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .wireframe-info p {
+            color: var(--yt-text-secondary);
+            font-size: 15px;
+            line-height: 1.6;
+            max-width: 800px;
+        }
+
+        .wireframe-info .user-quote {
+            background: var(--learning-light);
+            border-left: 4px solid var(--learning-blue);
+            padding: 16px 20px;
+            margin-top: 20px;
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            color: var(--yt-text);
+        }
+
+        /* Screen Flow */
+        .screen-flow {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+        }
+
+        .screen-card {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+        }
+
+        .screen-wrapper {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .screen-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .screen-number {
+            background: var(--yt-dark);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .screen-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--yt-text);
+        }
+
+        .screen-arrow {
+            color: white;
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            opacity: 0.5;
+        }
+
+        /* Phone Frame */
+        .phone-frame {
+            width: 375px;
+            height: 700px;
+            background: var(--yt-light-bg);
+            border-radius: 40px;
+            overflow: hidden;
+            border: 12px solid #1a1a1a;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 30px;
+            background: #1a1a1a;
+            border-radius: 0 0 20px 20px;
+            z-index: 10;
+        }
+
+        .phone-screen {
+            height: 100%;
+            overflow-y: auto;
+            background: white;
+        }
+
+        /* YouTube UI Components */
+        .yt-header {
+            background: white;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border-bottom: 1px solid var(--yt-border);
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+
+        .yt-logo {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .yt-logo-icon {
+            width: 28px;
+            height: 20px;
+            background: var(--yt-red);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .yt-logo-icon::after {
+            content: '';
+            border: 5px solid transparent;
+            border-left: 8px solid white;
+            margin-left: 3px;
+        }
+
+        .yt-logo-text {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .yt-search-bar {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            background: var(--yt-light-bg);
+            border-radius: 20px;
+            padding: 8px 16px;
+            gap: 8px;
+        }
+
+        .yt-search-bar input {
+            border: none;
+            background: transparent;
+            flex: 1;
+            font-size: 14px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .yt-search-icon {
+            color: var(--yt-text-secondary);
+            font-size: 18px;
+        }
+
+        .yt-icons {
+            display: flex;
+            gap: 16px;
+            color: var(--yt-text);
+            font-size: 20px;
+        }
+
+        /* Learning Mode Toggle */
+        .learning-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .learning-toggle.off {
+            background: var(--yt-light-bg);
+            color: var(--yt-text-secondary);
+        }
+
+        .learning-toggle.on {
+            background: var(--learning-blue);
+            color: white;
+        }
+
+        /* Filter Chips */
+        .filter-section {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--yt-border);
+            background: white;
+        }
+
+        .filter-label {
+            font-size: 12px;
+            color: var(--yt-text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .filter-chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-chip {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid var(--yt-border);
+            background: white;
+            color: var(--yt-text);
+        }
+
+        .filter-chip:hover {
+            background: var(--yt-light-bg);
+        }
+
+        .filter-chip.active {
+            background: var(--yt-dark);
+            color: white;
+            border-color: var(--yt-dark);
+        }
+
+        .filter-chip.highlight {
+            background: var(--learning-blue);
+            color: white;
+            border-color: var(--learning-blue);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(26, 115, 232, 0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(26, 115, 232, 0); }
+        }
+
+        /* Active Filters */
+        .active-filters {
+            padding: 8px 16px;
+            background: var(--learning-light);
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .active-filter-tag {
+            background: white;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--learning-blue);
+            border: 1px solid var(--learning-blue);
+        }
+
+        .active-filter-tag .close {
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Video Results */
+        .video-results {
+            padding: 16px;
+        }
+
+        .video-card {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--yt-border);
+        }
+
+        .video-card:last-child {
+            border-bottom: none;
+        }
+
+        .video-thumbnail {
+            width: 160px;
+            height: 90px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            flex-shrink: 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .video-thumbnail.short {
+            width: 60px;
+            height: 107px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .shorts-badge {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            background: var(--yt-red);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .video-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .video-title {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.4;
+            margin-bottom: 4px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .video-channel {
+            font-size: 12px;
+            color: var(--yt-text-secondary);
+            margin-bottom: 2px;
+        }
+
+        .video-meta {
+            font-size: 12px;
+            color: var(--yt-text-secondary);
+        }
+
+        /* Learning Mode Specific */
+        .completion-rate {
+            margin-top: 6px;
+        }
+
+        .completion-bar {
+            height: 4px;
+            background: var(--yt-border);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 4px;
+        }
+
+        .completion-fill {
+            height: 100%;
+            background: var(--success-green);
+            border-radius: 2px;
+        }
+
+        .completion-text {
+            font-size: 11px;
+            color: var(--success-green);
+            font-weight: 500;
+        }
+
+        .learning-badges {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+        }
+
+        .learning-badge {
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: var(--learning-light);
+            color: var(--learning-blue);
+        }
+
+        /* Banners */
+        .learning-mode-banner {
+            background: var(--learning-blue);
+            color: white;
+            padding: 10px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .learning-mode-banner .turn-off {
+            font-size: 12px;
+            opacity: 0.8;
+            cursor: pointer;
+        }
+
+        .ai-detection-banner {
+            background: linear-gradient(135deg, var(--learning-blue) 0%, #4285f4 100%);
+            color: white;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+        }
+
+        .ai-detection-banner .dismiss {
+            margin-left: auto;
+            opacity: 0.8;
+            cursor: pointer;
+        }
+
+        /* Problem Highlight */
+        .problem-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(217, 48, 37, 0.1);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .problem-callout {
+            background: var(--error-red);
+            color: white;
+            padding: 10px 16px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .success-callout {
+            background: var(--success-green);
+            color: white;
+            padding: 10px 16px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 20px;
+            max-width: 320px;
+        }
+
+        .modal-icon {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .modal-features {
+            margin: 16px 0;
+        }
+
+        .modal-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: var(--yt-text-secondary);
+        }
+
+        .modal-feature .check {
+            color: var(--success-green);
+            font-weight: bold;
+        }
+
+        .modal-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 24px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 8px;
+            font-family: inherit;
+        }
+
+        .modal-btn.primary {
+            background: var(--learning-blue);
+            color: white;
+        }
+
+        .modal-btn.secondary {
+            background: transparent;
+            color: var(--yt-text-secondary);
+        }
+
+        /* Recommended Path */
+        .recommended-path {
+            background: linear-gradient(135deg, var(--learning-light) 0%, #e3f2fd 100%);
+            margin: 16px;
+            border-radius: 12px;
+            padding: 16px;
+            border: 2px solid var(--learning-blue);
+        }
+
+        .recommended-path-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--learning-blue);
+            margin-bottom: 12px;
+        }
+
+        .recommended-path .video-card {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 0;
+            border: none;
+        }
+
+        /* Annotation */
+        .annotation {
+            background: #fff9c4;
+            border-left: 4px solid var(--warning-yellow);
+            padding: 12px 16px;
+            margin-top: 16px;
+            border-radius: 0 8px 8px 0;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .annotation strong {
+            color: var(--yt-dark);
+        }
+
+        /* Loading Animation */
+        .loading-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 200px;
+            gap: 16px;
+        }
+
+        .loading-icon {
+            font-size: 48px;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 4px;
+            background: var(--yt-border);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .loading-fill {
+            height: 100%;
+            background: var(--learning-blue);
+            width: 0;
+            animation: loading 1.5s ease forwards;
+        }
+
+        @keyframes loading {
+            to { width: 100%; }
+        }
+
+        .loading-text {
+            font-size: 14px;
+            color: var(--yt-text-secondary);
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid var(--yt-border);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 10px;
+            color: var(--yt-text-secondary);
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: var(--yt-dark);
+        }
+
+        .nav-icon {
+            font-size: 20px;
+        }
+
+        /* Show Shorts Link */
+        .show-shorts-link {
+            text-align: center;
+            padding: 16px;
+            border-top: 1px solid var(--yt-border);
+            margin-top: 16px;
+        }
+
+        .show-shorts-link a {
+            color: var(--yt-blue);
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        /* Chapters Panel */
+        .chapters-panel {
+            background: var(--yt-light-bg);
+            padding: 16px;
+        }
+
+        .chapters-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .chapters-title {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .progress-badge {
+            font-size: 12px;
+            color: var(--yt-text-secondary);
+        }
+
+        .chapter-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--yt-border);
+            font-size: 13px;
+        }
+
+        .chapter-item:last-child {
+            border-bottom: none;
+        }
+
+        .chapter-status {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .chapter-status.completed {
+            background: var(--success-green);
+            color: white;
+        }
+
+        .chapter-status.current {
+            background: var(--learning-blue);
+            color: white;
+        }
+
+        .chapter-status.upcoming {
+            background: var(--yt-border);
+            color: var(--yt-text-secondary);
+        }
+
+        .chapter-name {
+            flex: 1;
+        }
+
+        .chapter-time {
+            color: var(--yt-text-secondary);
+            font-size: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .screen-flow {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .screen-arrow {
+                transform: rotate(90deg);
+            }
+
+            .phone-frame {
+                width: 340px;
+                height: 640px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <h1>📱 YouTube Wireframes</h1>
+                <p>Phase 3: Shorts in Educational Search Solution</p>
+            </div>
+            <div class="author-info">
+                <strong>Swapan Kumar Soren</strong><br>
+                Cohort C48<br>
+                December 2025
+            </div>
+        </div>
+    </header>
+
+    <!-- Wireframe Navigation -->
+    <nav class="wireframe-nav">
+        <button class="wireframe-tab active" onclick="showWireframe('wf1')">
+            🎯 WF1: Enhanced Search Filters
+            <span class="rice-score">RICE: 27.0</span>
+        </button>
+        <button class="wireframe-tab" onclick="showWireframe('wf2')">
+            🎓 WF2: Learning Mode
+            <span class="rice-score">RICE: 9.0</span>
+        </button>
+        <button class="wireframe-tab" onclick="showWireframe('wf3')">
+            🤖 WF3: Auto-Detect Intent
+            <span class="rice-score">RICE: 9.0</span>
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="wireframe-container">
+        
+        <!-- ==================== WIREFRAME 1 ==================== -->
+        <section id="wf1" class="wireframe-section active">
+            <div class="wireframe-info">
+                <h2>
+                    Enhanced Search Filters
+                    <span class="badge">P0 Solution</span>
+                </h2>
+                <p>
+                    <strong>Combines:</strong> "Exclude Shorts" Toggle + Duration Quick Filters<br>
+                    <strong>RICE Score:</strong> 27.0 (Highest priority)<br>
+                    <strong>Root Causes Addressed:</strong> RC1 (No content-type filtering), RC4 (No duration-based sorting)
+                </p>
+                <div class="user-quote">
+                    "I have to scroll a lot to find a 30-40 minute tutorial." — Neha (8/10 frustration)
+                </div>
+            </div>
+
+            <div class="screen-flow">
+                <!-- Screen 1.1 -->
+                <div class="screen-card">
+                    <div class="screen-wrapper">
+                        <div class="screen-header">
+                            <span class="screen-number">1</span>
+                            <span class="screen-title">Search Query</span>
+                        </div>
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <div class="yt-header">
+                                    <div class="yt-logo">
+                                        <div class="yt-logo-icon"></div>
+                                        <span class="yt-logo-text">YouTube</span>
+                                    </div>
+                                    <div class="yt-icons">🔔 👤</div>
+                                </div>
+                                <div style="padding: 20px 16px;">
+                                    <div class="yt-search-bar" style="border: 2px solid var(--yt-dark);">
+                                        <span class="yt-search-icon">🔍</span>
+                                        <input type="text" value="Python for beginners tutorial" readonly>
+                                    </div>
+                                </div>
+                                <div style="padding: 0 16px; color: var(--yt-text-secondary); font-size: 13px;">
+                                    <p style="margin-bottom: 16px;"><strong>Recent searches:</strong></p>
+                                    <p style="padding: 8px 0; border-bottom: 1px solid var(--yt-border);">Excel tutorial for beginners</p>
+                                    <p style="padding: 8px 0; border-bottom: 1px solid var(--yt-border);">Machine learning explained</p>
+                                    <p style="padding: 8px 0;">SQL database tutorial</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="annotation">
+                            <strong>User Intent:</strong> Neha searches for "Python for beginners tutorial" expecting comprehensive learning content.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="screen-arrow">→</div>
+
+                <!-- Screen 1.2 -->
+                <div class="screen-card">
+                    <div class="screen-wrapper">
+                        <div class="screen-header">
+                            <span class="screen-number">2</span>
+                            <span class="screen-title">Current Results (Problem)</span>
+                        </div>
+                        <div class="phone-frame">
+                            <div class="phone-screen" style="position: relative;">
+                                <div class="problem-callout">
+                                    ❌ Current Problem: 4 of 6 results are Shorts
+                                </div>
+                                <div class="yt-header">
+                                    <div class="yt-search-bar">
+                                        <span class="yt-search-icon">🔍</span>
+                                        <input type="text" value="Python for beginners tutorial" readonly>
+                                    </div>
+                                </div>
+                                <div class="filter-section">
+                                    <div class="filter-chips">
+                                        <span class="filter-chip active">All</span>
+                                        <span class="filter-chip">Filters ▼</span>
+                                    </div>
+                                </div>
+                                <div class="video-results">
+                                    <!-- Short 1 -->
+                                    <div class="video-card">
+                                        <div class="video-thumbnail short">
+                                            <span class="shorts-badge">⚡ Short</span>
+                                            <span class="video-duration">0:58</span>
+                                        </div>
+                                        <div class="video-info">
+                                            <div class="video-title">Python Basics in 60 Seconds 🐍</div>
+                                            <div class="video-channel">CodeQuick</div>
+                                            <div class="video-meta">1.2M views • 2 days ago</div>
+                                        </div>
+                                    </div>
+                                    <!-- Short 2 -->
+                                    <div class="video-card">
+                                        <div class="video-thumbnail short">
+                                            <span class="shorts-badge">⚡ Short</span>
+                                            <span class="video-duration">0:45</span>
+                                        </div>
+                                        <div class="video-info">
+                                            <div class="video-title">Learn Python FAST! #coding</div>
+                                            <div class="video-channel">TechTips</div>
+                                            <div class="video-meta">856K views • 1 week ago</div>
+                                        </div>
+                                    </div>
+                                    <!-- Video 1 -->
+                                    <div class="video-card">
+                                        <div class="video-thumbnail">
+                                            <span class="video-duration">45:22</span>
+                                        </div>
+                                        <div class="video-info">
+                                            <div class="video-title">Python Tutorial for Beginners</div>
+                                            <div class="video-channel">Programming with Mosh</div>
+                                            <div class="video-meta">8.5M views • 2 years ago</div>
+                                        </div>
+                                    </div>
+                                    <!-- Short 3 -->
+                                    <div class="video-card">
+                                        <div class="video-thumbnail short">
+                                            <span class="shorts-badge">⚡ Short</span>
+                                            <span class="video-duration">0:32</span>
+                                        </div>
+                                        <div class="video-info">
+                                            <div class="video-title">Python Tips You Need! 🐍</div>
+                                            <div class="video-channel">DevShorts</div>
+                                            <div class="video-meta">2.1M views • 3 days ago</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="annotation">
+                            <strong>The Problem:</strong> Shorts dominate results despite searching for "tutorial". User must scroll past irrelevant content. Average frustration: 8/10.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="screen-arrow">→</div>
+
+                <!-- Screen 1.3 -->
+                <div class="screen-card">
+                    <div class="screen-wrapper">
+                        <div class="screen-header">
+                            <span class="screen-number">3</span>
+                            <span class="screen-title">Enhanced Filters (Solution)</span>
+                        </div>
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <div class="yt-header">
+                                    <div class="yt-search-bar">
+                                        <span class="yt-search-icon">🔍</span>
+                                        <input type="text" value="Python for beginners tutorial" readonly>
+                                    </div>
+                                </div>
+                                <div class="filter-section">
+                                    <div class="filter-label">Duration:</div>
+                                    <div class="filter-chips">
+                                        <span class="filter-chip">All</span>
+                                        <span class="filter-chip">Quick &lt;5m</span>
+                                        <span class="filter-chip">Medium 5-20m</span>
+                                        <span class="filter-chip active">Deep 20m+</span>
+                                    </div>
+                                </div>
+                                <div class="filter-section" style="border-top: none; padding-top: 0;">
+                                    <div class="filter-label">Content Type:</div>
+                                    <div class="filter-chips">
+                                        <span class="filter-chip">All Videos</span>
+                                        <span class="filter-chip highlight">✓ Exclude Shorts</span>
+                                    </div>
+                                </div>
+                                <div style="padding: 16px; background: var(--learning-light); margin: 16px; border-radius: 12px; border: 2px dashed var(--learning-blue);">
+                                    <p style="font-size: 14px; font-weight: 500; color: var(--learning-blue); margin-bottom: 8px;">🆕 NEW FILTERS</p>
+                                    <p style="font-size: 13px; color: var(--yt-text-secondary);">
+                                        • <strong>Duration chips</strong> visible without clicking "Filters"<br>
+                                        • <strong>"Exclude Shorts"</strong> toggle directly addresses user pain
+                                    </p>
+                                </div>
+                                <div style="padding: 0 16px;">
+                                    <button style="width: 100%; padding: 14px; background: var(--yt-red); color: white; border: none; border-radius: 24px; font-size: 15px; font-weight: 500; cursor: pointer;">
+                                        Apply Filters
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="annotation">
+                            <strong>The Solution:</strong> Prominent filter chips let users quickly exclude Shorts and select duration. No need to dig through menus.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="screen-arrow">→</div>
+
+                <!-- Screen 1.4 -->
+                <div class="screen-card">
+                    <div class="screen-wrapper">
+                        <div class="screen-header">
+                            <span class="screen-number">4</span>
+                            <span class="screen-title">Filtered Results (Success)</span>
+                        </div>
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <div class="success-callout">
+                                    ✅ All results are comprehensive tutorials
+                                </div>
+                                <div class="yt-header">
+                                    <div class="yt-search-bar">
+                                        <span class="yt-search-icon">🔍</span>
+                                        <input type="text" value="Python for beginners tutorial" readonly>
+                                    </div>
+                                </div>
+                                <div class="active-filters">
+                                    <span class="active-filter-tag">Exclude Shorts <span class="close">×</span></span>
+                                    <span class="active-filter-tag">20+ minutes <span class="close">×</span></span>
+                                </div>
+                                <div class="video-results">
+                                    <div class="video-card">
+                                        <div class="video-thumbnail">
+                                            <span class="video-duration">4:26:52</span>
+                                        </div>
+                                        <div class="video-info">
+                                            <div class="video-title">Python Tutorial for Beginners - Full Course</div>
+                                            <div class="video-channel">Programming with Mosh</div>
+                                            <div class="video-meta">42M views • 3 years ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="video-card">
+                                        <div class="video-thumbnail">
+                                            <span class="video-duration">4:20:38</span>
+                                        </div>
+                                        <div class="video-info">
+                                            <div class="video-title">Learn Python - Full Course for Beginners</div>
+                                            <div class="video-channel">freeCodeCamp.org</div>
+                                            <div class="video-meta">38M views • 4 years ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="video-card">
+                                        <div class="video-thumbnail">
+                                            <span class="video-duration">1:30:47</span>
+                                        </div>
+                                        <div class="video-info">
+                                            <div class="video-title">Python Crash Course For Beginners</div>
+                                            <div class="video-channel">Traversy Media</div>
+                                            <div class="video-meta">8.5M views • 2 years ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="video-card">
+                                        <div class="video-thumbnail">
+                                            <span class="video-duration">56:23</span>
+                                        </div>
+                                        <div class="video-info">
+                                            <div class="video-title">Python for Absolute Beginners</div>
+                                            <div class="video-channel">CS Dojo</div>
+                                            <div class="video-meta">5.2M views • 3 years ago</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="annotation">
+                            <strong>Success State:</strong> Neha finds comprehensive tutorials immediately. No scrolling through Shorts. Search abandonment reduced.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== WIREFRAME 2 ==================== -->
+        <section id="wf2" class="wireframe-section">
+            <div class="wireframe-info">
+                <h2>
+                    Learning Mode
+                    <span class="badge">Comprehensive Solution</span>
+                </h2>
+                <p>
+                    <strong>Description:</strong> A toggleable mode that transforms the entire search and browse experience for learners<br>
+                    <strong>RICE Score:</strong> 9.0<br>
+                    <strong>Root Causes Addressed:</strong> RC1, RC2, RC4 (Multiple root causes)
+                </p>
+                <div class="user-quote">
+                    "Sometimes I just leave YouTube and search on Google instead." — Neha
+                </div>
+            </div>
+
+            <div class="screen-flow">
+                <!-- Screen 2.1 -->
+                <div class="screen-card">
+                    <div class="screen-wrapper">
+                        <div class="screen-header">
+                            <span class="screen-number">1</span>
+                            <span class="screen-title">Home (Toggle Off)</span>
+                        </div>
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <div class="yt-header">
+                                    <div class="yt-logo">
+                                        <div class="yt-logo-icon"></div>
+                                    </div>
+                                    <div class="yt-search-bar">
+                                        <span class="yt-search-icon">🔍</span>
+                                        <input type="text" placeholder="Search" readonly>
+                                    </div>
+                                    <div class="learning-toggle off">
+                                        🎓 <span style="font-size: 16px;">○</span>
+                                    </div>
+                                </div>
+                                <div style="padding: 12px 16px; font-size: 13px; color: var(--yt-text-secondary);">
+                                    Regular YouTube Home Feed
+                                </div>
+                                <div class="video-results">
+                                    <div class="video-card">
+                                        <div class="video-thumbnail short">
+                                            <span class="shorts-badge">⚡ Short</span>
+                                        </div>
+                                        <div class="video-info">
+                                            <div class="video-title">Trending Short #1</div>
+                                            <div class="video-channel">Entertainment Channel</div>
+                                        </div>
+                                    </div>
+                                    <div class="video-card">
+                                        <div class="video-thumbnail">
+                                            <span class="video-duration">12:34</span>
+                                        </div>
+                                        <div class="video-info">
+                                            <div class="video-title">Recommended Video</div>
+                                            <div class="video-channel">Popular Creator</div>
+                                        </div>
+                                    </div>
+                                    <div class="video-card">
+                                        <div class="video-thumbnail short">
+                                            <span class="shorts-badge">⚡ Short</span>
+                                        </div>
+                                        <div class="video-info">
+                                            <div class="video-title">Viral Short #2</div>
+                                            <div class="video-channel">Trending Now</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bottom-nav">
+                                    <div class="nav-item active"><span class="nav-icon">🏠</span>Home</div>
+                                    <div class="nav-item"><span class="nav-icon">⚡</span>Shorts</div>
+                                    <div class="nav-item"><span class="nav-icon">➕</span></div>
+                                    <div class="nav-item"><span class="nav-icon">📺</span>Subs</div>
+                                    <div class="nav-item"><span class="nav-icon">📚</span>Library</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="annotation">
+                            <strong>Feature Discovery:</strong> Learning Mode toggle visible in header. When OFF, YouTube works normally with Shorts and entertainment content.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="screen-arrow">→</div>
+
+                <!-- Screen 2.2 -->
+                <div class="screen-card">
+                    <div class="screen-wrapper">
+                        <div class="screen-header">
+                            <span class="screen-number">2</span>
+                            <span class="screen-title">Activation Modal</span>
+                        </div>
+                        <div class="phone-frame">
+                            <div class="phone-screen" style="position: relative;">
+                                <div class="yt-header" style="opacity: 0.5;">
+                                    <div class="yt-logo"><div class="yt-logo-icon"></div></div>
+                                </div>
+                                <div class="modal-overlay">
+                                    <div class="modal-content">
+                                        <div class="modal-icon">🎓</div>
+                                        <div class="modal-title">Learning Mode</div>
+                                        <p style="text-align: center; color: var(--yt-text-secondary); font-size: 14px;">
+                                            Focus on learning without distractions.
+                                        </p>
+                                        <div class="modal-features">
+                                            <div class="modal-feature"><span class="check">✓</span> Shorts hidden from search</div>
+                                            <div class="modal-feature"><span class="check">✓</span> Long-form tutorials prioritized</div>
+                                            <div class="modal-feature"><span class="check">✓</span> Completion rates shown</div>
+                                            <div class="modal-feature"><span class="check">✓</span> Chapter navigation enabled</div>
+                                        </div>
+                                        <button class="modal-btn primary">Enable Learning Mode</button>
+                                        <button class="modal-btn secondary">Not now</button>
+                                        <div style="margin-top: 12px; font-size: 12px; color: var(--yt-text-secondary);">
+                                            <input type="checkbox" id="remember"> <label for="remember">Remember my preference</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="annotation">
+                            <strong>Value Proposition:</strong> Clear explanation of Learning Mode benefits. User understands what they'll get before enabling.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="screen-arrow">→</div>
+
+                <!-- Screen 2.3 -->
+                <div class="screen-card">
+                    <div class="screen-wrapper">
+                        <div class="screen-header">
+                            <span class="screen-number">3</span>
+                            <span class="screen-title">Learning Search</span>
+                        </div>
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <div class="learning-mode-banner">
+                                    <span>🎓 Learning Mode Active</span>
+                                    <span class="turn-off">Turn Off</span>
+                                </div>
+                                <div class="yt-header">
+                                    <div class="yt-logo">
+                                        <div class="yt-logo-icon" style="background: var(--learning-blue);"></div>
+                                    </div>
+                                    <div class="yt-search-bar">
+                                        <span class="yt-search-icon">🔍</span>
+                                        <input type="text" value="Python for beginners" readonly>
+                                    </div>
+                                    <div class="learning-toggle on">
+                                        🎓 <span style="font-size: 16px;">●</span>
+                                    </div>
+                                </div>
+                                <div style="padding: 16px;">
+                                    <p style="font-size: 13px; color: var(--yt-text-secondary); margin-bottom: 12px;">
+                                        Suggested Learning Topics:
+                                    </p>
+                                    <div class="filter-chips">
+                                        <span class="filter-chip">Python Basics</span>
+                                        <span class="filter-chip">Data Structures</span>
+                                        <span class="filter-chip">Web Dev</span>
+                                        <span class="filter-chip">Machine Learning</span>
+                                    </div>
+                                </div>
+                                <div style="padding: 0 16px;">
+                                    <p style="font-size: 13px; color: var(--yt-text-secondary); margin-bottom: 12px;">
+                                        Popular Learning Paths:
+                                    </p>
+                                    <div style="background: var(--learning-light); padding: 12px; border-radius: 8px; margin-bottom: 8px;">
+                                        <p style="font-size: 14px; font-weight: 500;">🐍 Python for Data Science</p>
+                                        <p style="font-size: 12px; color: var(--yt-text-secondary);">12 hours • 45 videos</p>
+                                    </div>
+                                    <div style="background: var(--learning-light); padding: 12px; border-radius: 8px;">
+                                        <p style="font-size: 14px; font-weight: 500;">🌐 Full Stack Web Development</p>
+                                        <p style="font-size: 12px; color: var(--yt-text-secondary);">20 hours • 68 videos</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="annotation">
+                            <strong>Mode Confirmation:</strong> Visual indicator confirms Learning Mode is active. Suggested topics help users discover learning paths. No Shorts visible.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="screen-arrow">→</div>
+
+                <!-- Screen 2.4 -->
+                <div class="screen-card">
+                    <div class="screen-wrapper">
+                        <div class="screen-header">
+                            <span class="screen-number">4</span>
+                            <span class="screen-title">Learning Results</span>
+                        </div>
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <div class="learning-mode-banner">
+                                    <span>🎓 Learning Mode Active</span>
+                                    <span class="turn-off">Turn Off</span>
+                                </div>
+                                <div class="filter-section">
+                                    <div class="filter-label">Duration:</div>
+                                    <div class="filter-chips">
+                                        <span class="filter-chip active">All</span>
+                                        <span class="filter-chip">&lt;30 min</span>
+                                        <span class="filter-chip">30-60 min</span>
+                                        <span class="filter-chip">1-3 hrs</span>
+                                    </div>
+                                </div>
+                                <div class="filter-section" style="padding-top: 0; border-top: none;">
+                                    <div class="filter-label">Level:</div>
+                                    <div class="filter-chips">
+                                        <span class="filter-chip active">Beginner</span>
+                                        <span class="filter-chip">Intermediate</span>
+                                        <span class="filter-chip">Advanced</span>
+                                    </div>
+                                </div>
+                                <div class="video-results">
+                                    <div class="video-card">
+                                        <div class="video-thumbnail">
+                                            <span class="video-duration">4:26:52</span>
+                                        </div>
+                                        <div class="video-info">
+                                            <div class="video-title">Python Tutorial for Beginners - Full Course</div>
+                                            <div class="video-channel">Programming with Mosh</div>
+                                            <div class="completion-rate">
+                                                <div class="completion-bar"><div class="completion-fill" style="width: 87%;"></div></div>
+                                                <span class="completion-text">87% completion rate</span>
+                                            </div>
+                                            <div class="learning-badges">
+                                                <span class="learning-badge">📚 12 chapters</span>
+                                                <span class="learning-badge">Beginner</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="video-card">
+                                        <div class="video-thumbnail">
+                                            <span class="video-duration">4:20:38</span>
+                                        </div>
+                                        <div class="video-info">
+                                            <div class="video-title">Learn Python - Full Course for Beginners</div>
+                                            <div class="video-channel">freeCodeCamp.org</div>
+                                            <div class="completion-rate">
+                                                <div class="completion-bar"><div class="completion-fill" style="width: 82%;"></div></div>
+                                                <span class="completion-text">82% completion rate</span>
+                                            </div>
+                                            <div class="learning-badges">
+                                                <span class="learning-badge">📚 15 chapters</span>
+                                                <span class="learning-badge">Beginner</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="annotation">
+                            <strong>Quality Signals:</strong> Results show completion rates, chapters, skill levels — not just view counts. No Shorts. User finds comprehensive tutorials immediately.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="screen-arrow">→</div>
+
+                <!-- Screen 2.5 -->
+                <div class="screen-card">
+                    <div class="screen-wrapper">
+                        <div class="screen-header">
+                            <span class="screen-number">5</span>
+                            <span class="screen-title">Learning Player</span>
+                        </div>
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <div style="background: #000; height: 200px; display: flex; align-items: center; justify-content: center; color: white;">
+                                    <span style="font-size: 48px;">▶️</span>
+                                </div>
+                                <div style="padding: 12px 16px; background: white;">
+                                    <p style="font-weight: 500; font-size: 15px;">Python Tutorial for Beginners - Full Course</p>
+                                    <p style="font-size: 12px; color: var(--yt-text-secondary);">Programming with Mosh • 42M views</p>
+                                </div>
+                                <div class="chapters-panel">
+                                    <div class="chapters-header">
+                                        <span class="chapters-title">📚 CHAPTERS</span>
+                                        <span class="progress-badge">Chapter 4 of 12 • 33%</span>
+                                    </div>
+                                    <div class="chapter-item">
+                                        <span class="chapter-status completed">✓</span>
+                                        <span class="chapter-name">1. Introduction</span>
+                                        <span class="chapter-time">0:00</span>
+                                    </div>
+                                    <div class="chapter-item">
+                                        <span class="chapter-status completed">✓</span>
+                                        <span class="chapter-name">2. Installing Python</span>
+                                        <span class="chapter-time">5:23</span>
+                                    </div>
+                                    <div class="chapter-item">
+                                        <span class="chapter-status completed">✓</span>
+                                        <span class="chapter-name">3. Variables & Data Types</span>
+                                        <span class="chapter-time">15:47</span>
+                                    </div>
+                                    <div class="chapter-item">
+                                        <span class="chapter-status current">●</span>
+                                        <span class="chapter-name" style="font-weight: 500;">4. Control Flow</span>
+                                        <span class="chapter-time">45:22</span>
+                                    </div>
+                                    <div class="chapter-item">
+                                        <span class="chapter-status upcoming">○</span>
+                                        <span class="chapter-name">5. Functions</span>
+                                        <span class="chapter-time">1:12:33</span>
+                                    </div>
+                                    <div class="chapter-item">
+                                        <span class="chapter-status upcoming">○</span>
+                                        <span class="chapter-name">6. Lists & Tuples</span>
+                                        <span class="chapter-time">1:45:20</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="annotation">
+                            <strong>Deep Learning Support:</strong> Chapter navigation with progress tracking. Visual completion status. No Shorts in recommendations. Supports focused learning.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== WIREFRAME 3 ==================== -->
+        <section id="wf3" class="wireframe-section">
+            <div class="wireframe-info">
+                <h2>
+                    Auto-Detect Educational Intent
+                    <span class="badge">AI-Powered</span>
+                </h2>
+                <p>
+                    <strong>Description:</strong> AI automatically detects learning intent and adjusts results without user action<br>
+                    <strong>RICE Score:</strong> 9.0<br>
+                    <strong>Root Causes Addressed:</strong> RC2 (No learning intent detection)
+                </p>
+                <div class="user-quote">
+                    "When I search for 'Python for beginners', the first few results are Shorts." — Neha
+                </div>
+            </div>
+
+            <div class="screen-flow">
+                <!-- Screen 3.1 -->
+                <div class="screen-card">
+                    <div class="screen-wrapper">
+                        <div class="screen-header">
+                            <span class="screen-number">1</span>
+                            <span class="screen-title">Educational Search Query</span>
+                        </div>
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <div class="yt-header">
+                                    <div class="yt-logo">
+                                        <div class="yt-logo-icon"></div>
+                                        <span class="yt-logo-text">YouTube</span>
+                                    </div>
+                                    <div class="yt-icons">🔔 👤</div>
+                                </div>
+                                <div style="padding: 20px 16px;">
+                                    <div class="yt-search-bar" style="border: 2px solid var(--yt-dark);">
+                                        <span class="yt-search-icon">🔍</span>
+                                        <input type="text" value="How to learn Python for data science" readonly>
+                                    </div>
+                                </div>
+                                <div style="padding: 0 16px; color: var(--yt-text-secondary); font-size: 13px;">
+                                    <p style="margin-bottom: 16px;"><strong>Recent searches:</strong></p>
+                                    <p style="padding: 8px 0; border-bottom: 1px solid var(--yt-border);">Excel tutorial for beginners</p>
+                                    <p style="padding: 8px 0; border-bottom: 1px solid var(--yt-border);">Machine learning explained</p>
+                                    <p style="padding: 8px 0;">SQL database tutorial</p>
+                                </div>
+                                <div style="padding: 16px; margin-top: 20px;">
+                                    <div style="background: var(--learning-light); padding: 12px; border-radius: 8px; display: flex; align-items: center; gap: 10px;">
+                                        <span style="font-size: 24px;">🤖</span>
+                                        <div>
+                                            <p style="font-size: 13px; font-weight: 500; color: var(--learning-blue);">AI Intent Detection</p>
+                                            <p style="font-size: 12px; color: var(--yt-text-secondary);">Keywords: "how to learn", "for data science"</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="annotation">
+                            <strong>User Intent:</strong> Query contains educational signals: "How to learn", topic + purpose format. No manual filtering needed.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="screen-arrow">→</div>
+
+                <!-- Screen 3.2 -->
+                <div class="screen-card">
+                    <div class="screen-wrapper">
+                        <div class="screen-header">
+                            <span class="screen-number">2</span>
+                            <span class="screen-title">AI Detection (Brief)</span>
+                        </div>
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <div class="yt-header">
+                                    <div class="yt-search-bar">
+                                        <span class="yt-search-icon">🔍</span>
+                                        <input type="text" value="How to learn Python for data science" readonly>
+                                    </div>
+                                </div>
+                                <div class="loading-screen">
+                                    <div class="loading-icon">🎓</div>
+                                    <p style="font-weight: 500; color: var(--learning-blue);">Detected: Learning Intent</p>
+                                    <div class="loading-bar">
+                                        <div class="loading-fill"></div>
+                                    </div>
+                                    <p class="loading-text">Optimizing results for tutorials...</p>
+                                </div>
+                                <div style="padding: 16px; margin-top: 20px;">
+                                    <div style="background: #f5f5f5; padding: 12px; border-radius: 8px; font-size: 12px; color: var(--yt-text-secondary);">
+                                        <strong>AI Analysis:</strong><br>
+                                        • Query type: Educational<br>
+                                        • Confidence: 94%<br>
+                                        • Action: Prioritize long-form tutorials
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="annotation">
+                            <strong>AI Transparency:</strong> Brief loading indicator (&lt;1 second). User understands results are being optimized. Non-intrusive.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="screen-arrow">→</div>
+
+                <!-- Screen 3.3 -->
+                <div class="screen-card">
+                    <div class="screen-wrapper">
+                        <div class="screen-header">
+                            <span class="screen-number">3</span>
+                            <span class="screen-title">AI-Optimized Results</span>
+                        </div>
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <div class="ai-detection-banner">
+                                    <span>🎓</span>
+                                    <span>Results optimized for learning</span>
+                                    <span class="dismiss">ℹ️ ✕</span>
+                                </div>
+                                <div class="recommended-path">
+                                    <div class="recommended-path-header">
+                                        ⭐ RECOMMENDED LEARNING PATH
+                                    </div>
+                                    <div class="video-card" style="margin: 0; padding: 0; border: none;">
+                                        <div class="video-thumbnail" style="width: 120px; height: 68px;">
+                                            <span class="video-duration">12:20:33</span>
+                                        </div>
+                                        <div class="video-info">
+                                            <div class="video-title" style="font-size: 13px;">Python for Data Science - Full Course</div>
+                                            <div class="video-channel">freeCodeCamp.org</div>
+                                            <div class="completion-rate">
+                                                <div class="completion-bar"><div class="completion-fill" style="width: 89%;"></div></div>
+                                                <span class="completion-text">89% learners complete this</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="padding: 8px 16px; font-size: 13px; font-weight: 500; color: var(--yt-text-secondary);">
+                                    MORE TUTORIALS
+                                </div>
+                                <div class="video-results" style="padding-top: 0;">
+                                    <div class="video-card">
+                                        <div class="video-thumbnail">
+                                            <span class="video-duration">4:12:18</span>
+                                        </div>
+                                        <div class="video-info">
+                                            <div class="video-title">Python for Data Analysis - Full Tutorial</div>
+                                            <div class="video-channel">Keith Galli</div>
+                                            <div class="completion-rate">
+                                                <div class="completion-bar"><div class="completion-fill" style="width: 85%;"></div></div>
+                                                <span class="completion-text">85% completion</span>
+                                            </div>
+                                            <div class="learning-badges">
+                                                <span class="learning-badge">Beginner</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="video-card">
+                                        <div class="video-thumbnail">
+                                            <span class="video-duration">6:45:22</span>
+                                        </div>
+                                        <div class="video-info">
+                                            <div class="video-title">Data Science with Python - Complete Bootcamp</div>
+                                            <div class="video-channel">365 Data Science</div>
+                                            <div class="completion-rate">
+                                                <div class="completion-bar"><div class="completion-fill" style="width: 78%;"></div></div>
+                                                <span class="completion-text">78% completion</span>
+                                            </div>
+                                            <div class="learning-badges">
+                                                <span class="learning-badge">Beginner-Intermediate</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="show-shorts-link">
+                                    <a href="#">Looking for quick tips? Show Shorts & short videos</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="annotation">
+                            <strong>Automatic Solution:</strong> AI detects educational intent and optimizes results without user action. Featured "Learning Path" guides user. Shorts hidden by default but accessible.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="screen-arrow">→</div>
+
+                <!-- Screen 3.4 -->
+                <div class="screen-card">
+                    <div class="screen-wrapper">
+                        <div class="screen-header">
+                            <span class="screen-number">4</span>
+                            <span class="screen-title">Save Preference</span>
+                        </div>
+                        <div class="phone-frame">
+                            <div class="phone-screen" style="position: relative;">
+                                <div class="ai-detection-banner">
+                                    <span>🎓</span>
+                                    <span>Results optimized for learning</span>
+                                </div>
+                                <div class="video-results" style="opacity: 0.5;">
+                                    <div class="video-card">
+                                        <div class="video-thumbnail"><span class="video-duration">4:26:52</span></div>
+                                        <div class="video-info">
+                                            <div class="video-title">Python Tutorial...</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="position: absolute; bottom: 0; left: 0; right: 0; background: white; border-radius: 16px 16px 0 0; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); padding: 24px;">
+                                    <div style="text-align: center; margin-bottom: 16px;">
+                                        <span style="font-size: 32px;">🎓</span>
+                                    </div>
+                                    <p style="font-weight: 500; text-align: center; margin-bottom: 8px;">You seem to prefer tutorials</p>
+                                    <p style="font-size: 13px; color: var(--yt-text-secondary); text-align: center; margin-bottom: 20px;">
+                                        Always optimize results for learning searches?
+                                    </p>
+                                    <button style="width: 100%; padding: 14px; background: var(--learning-blue); color: white; border: none; border-radius: 24px; font-size: 15px; font-weight: 500; cursor: pointer; margin-bottom: 8px;">
+                                        Yes, remember this
+                                    </button>
+                                    <button style="width: 100%; padding: 14px; background: transparent; color: var(--yt-text-secondary); border: none; font-size: 14px; cursor: pointer;">
+                                        No thanks
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="annotation">
+                            <strong>Personalization:</strong> After user engages with learning content, offer to remember preference. Reduces future friction for returning learners.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 40px 20px; color: rgba(255,255,255,0.6); font-size: 13px;">
+        <p>YouTube Product Analysis — Phase 3: Solution Design</p>
+        <p style="margin-top: 8px;">Cohort C48 • December 2025</p>
+    </footer>
+
+    <script>
+        function showWireframe(id) {
+            // Hide all sections
+            document.querySelectorAll('.wireframe-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Deactivate all tabs
+            document.querySelectorAll('.wireframe-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(id).classList.add('active');
+            
+            // Activate clicked tab
+            event.currentTarget.classList.add('active');
+        }
+
+        // Add smooth scrolling for screen flow
+        document.querySelectorAll('.screen-flow').forEach(flow => {
+            flow.addEventListener('wheel', (e) => {
+                if (e.deltaY !== 0) {
+                    e.preventDefault();
+                    flow.scrollLeft += e.deltaY;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
